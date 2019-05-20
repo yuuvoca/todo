@@ -130,6 +130,6 @@ end
 
 get '/tasks/done' do
   @lists = List.all
-  @tasks = current_user.tasks.due_over
+  @tasks = current_user.tasks.where(completed: true)
   erb :index
 end
