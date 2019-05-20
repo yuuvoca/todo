@@ -2,14 +2,16 @@
   <div>
 	  <div>
 		  <div>
-			  <ul>
-				  <li><a href="/">トップ</a></li>
-					<li><a href="/tasks/done">done</a></li>
-					<li><a href="/tasks/over">締切過ぎた</a></li>
-				  <% @lists.each do |list| %>
-					  <li><a href="/?list=<%= list.id %>"><%=list.name%></a></li>
-					<% end %>
-				</ul>
+			  <% if !current_user.nil? %>
+          <ul>
+              <li><a href="/">トップ</a></li>
+              <li><a href="/tasks/done">done</a></li>
+              <li><a href="/tasks/over">締切過ぎた</a></li>
+              <% @lists.each do |list| %>
+                  <li><a href="/?list=<%= list.id %>"><%=list.name%></a></li>
+              <% end %>
+          </ul>
+<% end %>
 			</div>
 		  <table>
 			  <thead>

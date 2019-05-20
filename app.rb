@@ -26,7 +26,7 @@ get '/' do
   elsif params[:list].nil? then
     @tasks = current_user.tasks
   else
-    @tasks = List.find(params[:list]).tasks.where(user_id: current_user.id)
+    @tasks = List.find(params[:list]).tasks.had_by(current_user)
   end
   erb :index
 end
@@ -125,5 +125,11 @@ end
 get '/tasks/over' do
   @lists = List.all
   @tasks = current_user.tasks.where('due_date < ?', Date.today).where(completed: [nil, false])
+  erb :index
+end
+
+get '/tasks/done' do
+  @lists = List.all
+  @tasks = current_user.tasks.due_over
   erb :index
 end
